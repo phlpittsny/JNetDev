@@ -1,0 +1,16 @@
+##### Makefile for NetDev ####
+
+all: run.sh
+
+run.sh:	GS1_d/GS1.java GS2_d/GS2.java GS3_d/Ping.java GS4_d/Ping2.java GS1_d/run.sh
+	javac -classpath .. GS1_d/GS1.java
+	javac -classpath .. GS2_d/GS2.java
+	javac -classpath .. GS3_d/Ping.java
+	javac -classpath .. GS4_d/Ping*.java
+	cp GS1_d/run.sh .
+	@echo "Type ./run.sh N where N is the example to run"
+	
+clean:
+	rm -f */*.class
+	rm -f *.jar */*.jar
+

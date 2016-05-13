@@ -1,0 +1,31 @@
+This is a distribution of the jNetDev network development package.
+The version can number can be found in the file VERSION, and is generally
+formatted as a date.
+
+jNetDev is open source software governed by the terms of the GNU GPL.
+This license is in the file LICENSE for your information.
+
+The purpose of jNetDev is to provide a coherent, object-oriented class
+library for reading packets from network devices (NICs) and injecting
+packets into the network via those devices. Reading is done via the
+well known package pcap (WinPcap on Windows systems). This package may
+be found at:
+	linux/osx	www.tcpdump.org
+	win32		www.winpcap.org
+
+As the above list implies, jNetDev has been ported to linux, osx, and
+win32 platforms. For details on how to install on any of these, read
+the appropriate INSTALL file (INSTALL.linux, INSTALL.osx or INSTALL.win32).
+
+If you wish only the binaries, and do not wish to recompile jNetDev for
+your site, that also may be accomplished using the filed in the bin
+directory. See the appropriate BINARIES file for details (BINARIES.linux,
+BINARIES.osx or BINARIES.win32).
+
+For more information on jNetDev and associated software, see the web site:
+	netdev.rit.edu
+
+Peter H. Lutz, Ph.D.
+Rochester Institute of Technology
+Peter.Lutz@rit.edu
+

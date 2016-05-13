@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: Ping
+Class-Path: . /usr/lib/jNetDev.jar

@@ -1,0 +1,41 @@
+##### Makefile for jNetDev ####
+##### OSX version
+
+JAVA_HOME = /Library/Java/Home
+CC = gcc
+CFLAGS = -DOSX
+INCLUDES = \
+	-I"$(JAVA_HOME)/bundle/Headers"
+LIBS = -lpcap 
+JHDRS = jND_CaptureSession.h \
+	jND_CaptureThread.h \
+	jND_NICList.h \
+	jND_NIC.h
+
+all: 	libjNetDev.jnilib
+
+.c.o:
+	gcc -c $(CFLAGS) $(INCLUDES) $<
+
+libjNetDev.jnilib:	jNetDev.o $(JHDRS)
+	gcc $(CFLAGS) $(INCLUDES) -dynamiclib -o libjNetDev.jnilib jNetDev.o $(LIBS)
+
+jND_CaptureSession.h:	../jNetDev/jND_CaptureSession.class 
+	javah -jni -classpath .. -o jND_CaptureSession.h jNetDev.jND_CaptureSession
+	
+jND_CaptureThread.h:	../jNetDev/jND_CaptureThread.class
+	javah -jni -classpath .. -o jND_CaptureThread.h jNetDev.jND_CaptureThread
+	
+jND_NIC.h:	../jNetDev/jND_NIC.class
+	javah -jni -classpath .. -o jND_NIC.h jNetDev.jND_NIC
+	
+jND_NICList.h:	../jNetDev/jND_NICList.class
+	javah -jni -classpath .. -o jND_NICList.h jNetDev.jND_NICList
+	
+install:	libjNetDev.jnilib
+	cp libjNetDev.jnilib /Library/Java/Extensions/libjNetDev.jnilib
+	chmod a+r /Library/Java/Extensions/libjNetDev.jnilib
+	cp libjNetDev.jnilib ../bin/osx
+
+clean:
+	rm -f *.o *.dll *.jnilib *.a *.dll *.swp

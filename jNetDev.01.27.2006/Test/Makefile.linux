@@ -1,0 +1,17 @@
+##### Makefile for NetDev ####
+
+all: ListALLNICS.class ListNICInfo.class Capture6.class
+
+ListALLNICS.class:	ListALLNICS.java
+	javac -classpath .. ListALLNICS.java
+
+ListNICInfo.class:	ListNICInfo.java
+	javac -classpath .. ListNICInfo.java
+
+Capture6.class:	Capture6.java
+	javac -classpath .. Capture6.java
+
+clean:
+	rm -f *.class
+	rm -f */*.class
+

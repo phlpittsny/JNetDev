@@ -1,0 +1,37 @@
+##### Makefile for NetDev ####
+JAVA_HOME = /usr/local/java/jdk1.5.0_06
+CC = gcc
+CFLAGS = -DLINUX 
+INCLUDES = \
+	-I"$(JAVA_HOME)/include" \
+	-I"$(JAVA_HOME)/include/linux"
+LIBS = -lpcap 
+JHDRS = jND_CaptureSession.h \
+	jND_CaptureThread.h \
+	jND_NICList.h \
+	jND_NIC.h
+
+all: 	jNetDev.so
+
+jNetDev.so:	jNetDev.c $(JHDRS)
+	gcc $(CFLAGS) $(INCLUDES) -shared -o jNetDev.so jNetDev.c $(LIBS)
+
+jND_CaptureSession.h:	../jNetDev/jND_CaptureSession.class 
+	javah -jni -classpath .. -o jND_CaptureSession.h jNetDev.jND_CaptureSession
+	
+jND_CaptureThread.h:	../jNetDev/jND_CaptureThread.class
+	javah -jni -classpath .. -o jND_CaptureThread.h jNetDev.jND_CaptureThread
+	
+jND_NIC.h:	../jNetDev/jND_NIC.class
+	javah -jni -classpath .. -o jND_NIC.h jNetDev.jND_NIC
+	
+jND_NICList.h:	../jNetDev/jND_NICList.class
+	javah -jni -classpath .. -o jND_NICList.h jNetDev.jND_NICList
+	
+install:	jNetDev.so
+	cp jNetDev.so /usr/lib/libjNetDev.so
+	chmod a+r /usr/lib/libjNetDev.so
+	cp jNetDev.so ../bin/libjNetDev.so
+	
+clean:
+	rm -f *.o *.dll *.so *.a *.dll *.swp

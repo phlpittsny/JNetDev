@@ -1,0 +1,48 @@
+This file will tell you how to install the jNetDev package from
+sources on a win32 (Windows) system. If you wish to install from 
+binaries, avoiding the compilation step, read BINARIES.win32.
+
+The compilation and linking of C code (which is a part of the
+support for this Java package) is non-trivial on a win32 system.
+The system I use is the mingw compiler set along with the msys
+unix-like shell. Cygwin will also work, but may require some
+reworking of the make files. For details on how and what to 
+install to make all this work, see the MSYS file.
+
+If you have installed the system outlined in MSYS you 
+already have WinPCAP installed on your system and you may
+proceed.
+
+Installing on a win32 system is quite straight forward, after
+msys and mingw are installed. In the root of the jNetDev 
+tree (i.e., the one containing this file) type:
+
+	export OS=win32
+	sh make.sh install
+
+NOTE: You will need an Administrator account to do this, as the
+install process places two files in C:\Windows\System32.
+These files are:
+
+	C:\Windows\System32\jNetDev.dll	The JNI library
+	C:\Windows\System32\jNetDev.jar	The Java class library
+
+The JNI library is necessary to connect jNetDev to the underlying
+pcap implementation.
+
+The Java class library is necessary for you to compile and run your
+jNetDev-based code. To compile a file named "MyProg.java" type:
+
+	javac -classpath C:\Windows\System32\jNetDev.jar:. MyProg.java
+
+To run this file after compilation, type:
+
+	java -classpath C:\Windows\System32\jNetDev.jar:. MyProg
+
+Note: these commands place the jNetDev.jar file in your class path,
+along with the current directory. Of course, if you are using other
+packages in you project you will need to add them to your class path
+as well.
+
+The JNI library must be in your PATH and is, once installed in 
+C:\Windows\System32.

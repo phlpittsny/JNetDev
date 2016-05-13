@@ -1,0 +1,53 @@
+This file will tell you how to install the jNetDev package from
+sources on a linux system. If you wish to install from binaries,
+avoiding the compilation step, read BINARIES.linux.
+
+First, ensure that pcap is installed on your system. A reasonable
+way to check for this is to see if:
+
+	ls /usr/include/*pcap*
+and
+	ls /usr/lib/*pcap*
+
+return any hits. If not, you will need to obtain and install
+pcap from www.tcpdump.org.
+
+Installing on a linux system is quite straight forward. In the
+root of the jNetDev tree (i.e., the one containing this file)
+type:
+
+	export OS=linux
+	sh make.sh install
+
+NOTE: You must be root to install the package, as it places files
+in system directories.
+
+This will create two files of import:  
+
+	/usr/lib/libjNetDev.so		The JNI library
+	/usr/lib/jNetDev.jar		The Java class library
+
+The JNI library is necessary to connect jNetDev to the underlying
+pcap implementation.
+
+The Java class library is necessary for you to compile and run your
+jNetDev-based code. To compile a file named "MyProg.java" type:
+
+	javac -classpath /usr/lib/jNetDev.jar:. MyProg.java
+
+To run this file after compilation, type:
+
+	export LD_LIBRARY_PATH=/usr/lib
+	java -classpath /usr/lib/jNetDev.jar:. MyProg
+
+Note: these commands place the jNetDev.jar file in your class path,
+along with the current directory. Of course, if you are using other
+packages in you project you will need to add them to your class path
+as well.
+
+The export command tells jNetDev where to find the libjNetDev.so
+file. This MUST be set for jNetDev to work.
+
+NOTE: You will need to be root in order to actually run your program.
+This is because access to the underlying network devices by pcap 
+requires such access. There is no work around to this at this time.

@@ -1,0 +1,10 @@
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\229680049.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\3899244145.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\2060714404.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\2751228764.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\3702221452.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\4293218135.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\2696069557.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\829528982.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\1289496282.index
+C:\msys\1.0\home\phl\jNetDev.10-18-2005\GS\.metadata\.plugins\org.eclipse.jdt.core\857505622.index

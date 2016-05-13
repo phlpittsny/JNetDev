@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+<center><B>
+<font size="+2"><B>jNetDev - an open source class library for low level packet manipulation in Java</B></font>
+<br>
+Version 10-14-2005</B></center>
+<p>
+This package is a class library written in Java that
+provides the user with classes to model a number of 
+objects important to network programming. Among these
+are NICs, IPv4 addresses, Ethernet addresses, packet
+captures, packet injection, and a collection of header
+formats.
+<br><br>
+This software is available for in win32/mingw, 
+linux, and os/x operating system environments.
+<br><br>
+The most elementary class is the jND_NIC class, which
+models a NIC. NICs are numbered from 0..N-1 where there
+are N NICs present in the host. One can find out the
+value of N by calling jND_NIC.numberOfNICs(). This is
+a static method, so one need not instantiate a jND_NIC object
+to call it.
+<br><br>
+One may instantiate any of the NICs via new jND_NIC(i)
+where 'i' is the NIC's number. Once the NIC has been so
+instantiated, you may retrieve its system name, its 
+description, it's IP address, MAC address, gateway or netmask.
+See the documentation for jND_NIC for details.
+<br><br>
+After NICs come IPv4Addresses and EthernetAddresses. These
+classes simply wrap an address in an object to provide
+a number of useful methods. These addresses may be constructed
+from strings or byte arrays or ints. There are also methods to 
+return strings or byte arrays or ints. For details, see jND_IPv4Address
+and jND_EthernetAddress.
+<br><br>
+Next in importance are CaptureSessions. A jND_CaptureSession is
+started to listen for incoming packets. One instantiated,
+you may set a filter for the capture session and start the
+session. When started, a separate thread runs capturing
+packets and placing them in a packet queue. When the capture
+session is stopped, the thread is killed. See jND_CaptureSession
+for details.
+<br><br>
+Also important is the ability to inject packets into the
+network (i.e., write packets). This is done via a jND_NIC. First
+the NIC must be opened via the open method of jND_NIC. Then,
+the inject method will allow any byte array to be injected.
+When done, the close method releases the NIC.
+<br><br>
+In addition, there are other useful classes, including:
+<br><br>
+<LI>jND_Mutex for synchronizing thread access to shared resources.</LI>
+<LI>jND_Utility which provides a collection of useful utilities.</LI>
+
+Finally, there is a collection of classes to model headers. This is
+a growing and changing list, but includes:
+<LI>jND_EthernetII and jND_Ethernet802_3 which model the frame headers for
+most ethernet frames.</LI>
+<LI>jND_ARP which models an ARP header.</LI>
+<LI>jND_IPv4 which models an IP (v4) header.</LI>
+<LI>jND_ICMP, jND_TCP and jND_UDP which model transport layer headers.</LI>
+</body>
+</html>

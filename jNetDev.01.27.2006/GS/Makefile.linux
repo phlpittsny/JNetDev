@@ -1,0 +1,28 @@
+##### Makefile for NetDev ####
+
+all: GS1.jar GS2.jar GS3.jar GS4.jar
+
+GS1.jar:	GS1_d/GS1.java 
+	javac -classpath .. GS1_d/GS1.java
+	cd GS1_d; jar cvfm GS1.jar MANIFEST.linux *.class
+	cp GS1_d/GS1.jar .
+
+GS2.jar:	GS2_d/GS2.java 
+	javac -classpath .. GS2_d/GS2.java
+	cd GS2_d; jar cvfm GS2.jar MANIFEST.linux *.class
+	cp GS2_d/GS2.jar .
+	
+GS3.jar:	GS3_d/Ping.java
+	javac -classpath .. GS3_d/Ping.java
+	cd GS3_d; jar cvfm GS3.jar MANIFEST.linux *.class
+	cp GS3_d/GS3.jar .
+
+GS4.jar:	GS4_d/Ping2.java GS4_d/PingThread.java
+	javac -classpath .. GS4_d/*.java
+	cd GS4_d; jar cvfm GS4.jar MANIFEST.linux *.class
+	cp GS4_d/GS4.jar .
+	
+clean:
+	rm -f */*.class
+	rm -f *.jar */*.jar
+

@@ -1,0 +1,61 @@
+##### Makefile for NetDev ####
+JAVA_HOME = C:/Program Files/Java/jdk1.6.0_16
+CC = gcc
+CFLAGS = -DWIN32
+INCLUDES = \
+	-I/mingw/include/pcap \
+	-I"$(JAVA_HOME)/include" \
+	-I"$(JAVA_HOME)/include/win32"
+LIBS = ./iphlpapi.a ./jvm.a \
+	-lws2_32 -lwpcap -lcrtdll -lpacket 
+JHDRS = jND_CaptureSession.h \
+	jND_CaptureThread.h \
+	jND_NICList.h \
+	jND_NIC.h
+
+all: 	jNetDev.dll
+
+jNetDev.dll:	jNetDev.c iphlpapi.a jvm.a $(JHDRS)
+	$(CC) $(CFLAGS) $(INCLUDES) -Wl,--add-stdcall-alias -shared -o jNetDev.dll jNetDev.c $(LIBS)
+
+jND_CaptureSession.h:	../jNetDev/jND_CaptureSession.class 
+	javah -jni -classpath .. -o jND_CaptureSession.h jNetDev.jND_CaptureSession
+	
+jND_CaptureThread.h:	../jNetDev/jND_CaptureThread.class
+	javah -jni -classpath .. -o jND_CaptureThread.h jNetDev.jND_CaptureThread
+	
+jND_NIC.h:	../jNetDev/jND_NIC.class
+	javah -jni -classpath .. -o jND_NIC.h jNetDev.jND_NIC
+	
+jND_NICList.h:	../jNetDev/jND_NICList.class
+	javah -jni -classpath .. -o jND_NICList.h jNetDev.jND_NICList
+	
+jvm.a:	jvm.def
+	dlltool --dllname jvm.dll --input-def jvm.def  \
+	    --output-lib jvm.a --add-stdcall-alias --kill-at 
+	    
+jvm.def:	
+	echo EXPORTS >jvm.def
+	echo JNI_CreateJavaVM@12 >>jvm.def
+	echo JNI_GetDefaultJavaVMInitArgs@4 >>jvm.def
+	echo JNI_GetCreatedJavaVMs@12 >>jvm.def
+	echo "" >>jvm.def
+	
+iphlpapi.a:	iphlpapi.def
+	dlltool --dllname iphlpapi.dll --def iphlpapi.def  \
+	    --output-lib iphlpapi.a --add-stdcall-alias --kill-at 
+	    
+iphlpapi.def:	impdef.exe
+	./impdef C:/windows/system32/iphlpapi.dll >iphlpapi.tmp
+	sed -e 's/GetAdaptersInfo/GetAdaptersInfo@8/' iphlpapi.tmp >iphlpapi.def
+	
+impdef.exe:			impdef.c
+	$(CC) -D_WINNT_ -c impdef.c
+	$(CC) -o impdef impdef.o
+	
+install:	jNetDev.dll
+	cp jNetDev.dll C:/windows/system32/jNetDev.dll
+	cp jNetDev.dll ../bin/win32
+	
+clean:
+	rm -f *.o *.dll *.so *.a *.exe *.swp

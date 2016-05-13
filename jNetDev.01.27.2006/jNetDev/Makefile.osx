@@ -1,0 +1,20 @@
+all:
+	javac -classpath .. *.java Headers/*.java
+	cd ..; jar -cvf jNetDev/jNetDev.jar jNetDev/*.class jNetDev/Headers/*.class
+
+install: all
+	cp jNetDev.jar /Library/Java/Extensions
+	chmod a+r /Library/Java/Extensions/jNetDev.jar
+	cp jNetDev.jar ../bin/osx
+
+clean:
+	rm -f *.class Headers/*.class
+	rm -f *.jar Headers/*.class
+	rm -f *.swp Headers/*.swp
+
+doc:
+	cd ..; javadoc -d Documentation/docroot/html jNetDev -subpackages jNetDev.Headers; cd ..
+	rm -f filelist.txt
+
+docclean:
+	cd ../Documentation; rm -rf docroot; cd ..

@@ -1,0 +1,50 @@
+This file will tell you how to install the jNetDev package from
+binaries on an osx system. If you wish to install from sources,
+read INSTALL.osx.
+
+First, ensure that pcap is installed on your system. A reasonable
+way to check for this is to see if:
+
+	ls /usr/include/*pcap*
+and
+	ls /usr/lib/*pcap*
+
+return any hits. If not, you will need to obtain and install
+pcap from www.tcpdump.org.
+
+Installing on an osx system is quite straight forward. 
+You must install two files, found in the bin/osx subdirectory.
+This are:
+
+	libjNetDev.jnilib	The JNI library
+	jNetDev.jar		The Java class library
+
+These files are often stored in /Library/Java/Extensions. 
+This, however, requires root access. If you do not have root 
+access, you may store them any place to which you have access.
+
+The JNI library is necessary to connect jNetDev to the underlying
+pcap implementation.
+
+The Java class library is necessary for you to compile and run your
+jNetDev-based code. To compile a file named "MyProg.java" type:
+
+	javac -classpath <where-you-put-jNetDev.jar>/jNetDev.jar:. MyProg.java
+
+To run this file after compilation, type:
+
+	java -classpath <where-you-put-jNetDev.jar>/jNetDev.jar:. \
+		-Djava.library.path=<where-you-put-libjNetDev.jnilib> MyProg
+
+NOTE: these two commands place the jNetDev.jar file in your class path,
+along with the current directory. Of course, if you are using other
+packages in you project you will need to add them to your class path
+as well.
+
+The -Djava.library.path magic tells jNetDev where to find the libjNetDev.so
+file. This MUST be set for jNetDev to work.
+
+NOTE: You will need to be root in order to actually run your program.
+This is because access to the underlying network devices by pcap 
+requires such access. There is no work around to this at this time.
+

@@ -1,0 +1,62 @@
+This file will explain how to install a MingW/MSys development
+system on your Windows machine, similar to the one used to develop
+jNetDev.
+
+STEP 1
+Open a browser and to go the MingW home page:
+
+	www.mingw.org
+
+From the menu on the left, click on Download. Scrolling down the
+page you will see a table with many links to software. Skip over
+thte Candidate section to the Current section. Locate the rows with
+MSYS in the second column. Then, download and run the file
+
+	MSYS-1.0.10.exe
+
+The version may differ, but you want the .exe from this section.
+This is a windows installable and will install a basic MSYS system
+for you in C:\Msys
+
+STEP 2
+From the same download page, download the MinGW Runtime. This will
+be a tar file. Avoid the one with '-src' in its name, as then 
+constains the full source code, and we do not need to go that far.
+
+Create the directory C:\MinGW and extract the runtime into it.
+ALSO, from the MSYS shell, edit /etc/fstab and add the line:
+
+	C:\mingw	/mingw
+
+to make mingw visible to MSYS.
+
+STEP 3
+From the same download page, download the following files:
+	MinGW utilities (avoid the -src file)
+	GCC ... the gcc-core* file (avoid the -src file)
+	GCC ... the gcc-g++* file (avoid the -src file)
+	binutils ... the file without -src, -into-html or -build)
+	Windows APL ... the win32api file without -src in its name
+
+Extract EACH of these files to the c:\MinGW directory.
+
+STEP 4
+Now, send your browser to:
+
+	www.winpcap.org
+
+and select 'Downloads' from the menu at the left. Download and
+execute the WinPcap auto-installer to install the DLLs.
+
+STEP 5
+Again ... from winpcap.org ... download the Developer's pack and
+extract it to a new, empty directory. Then, from the MSYS shell,
+
+	# cd to the WpdPack directory created when you extracted
+	# the Developer's Pack
+	mkdir /mingw/include/pcap
+	cp Include/* /mingw/include/pcap
+	cp Lib/* /mingw/lib
+
+FINALLY!!  You are all set to build the jNetDev distribution. See
+the file INSTALL.win32 in the root of the distribution tree.
